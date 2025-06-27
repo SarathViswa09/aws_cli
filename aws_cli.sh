@@ -1,10 +1,10 @@
 set -e
 
-AWS_REGION="ap-southeast-1"
-BUCKET_NAME="sarath-1-transfer-bucket"
-TRANSFER_USERNAME="tf-user-sarath"
-LAMBDA_FUNCTION_NAME="tf-file-automating"
-ACCOUNT_ID="440883867769"
+AWS_REGION=
+BUCKET_NAME=
+TRANSFER_USERNAME=
+LAMBDA_FUNCTION_NAME=
+ACCOUNT_ID=
 LAMBDA_ROLE_NAME="LambdaTransferTriggerRole"
 TRANSFER_ROLE_IAM_NAME="TransferS3AccessRole"
 TRANSFER_ROLE_ARN=arn:aws:iam::$ACCOUNT_ID:role/TransferS3AccessRole
@@ -97,7 +97,7 @@ aws s3api put-bucket-notification-configuration \
     --bucket "$BUCKET_NAME" \
     --notification-configuration '{
         "LambdaFunctionConfigurations": [{
-            "LambdaFunctionArn": "'"arn:aws:lambda:ap-southeast-1:440883867769:function:tf-file-automating"'",
+            "LambdaFunctionArn": "'"arn:aws:lambda:ap-southeast-1:${ACCOUNT_ID}:function:${LAMBDA_ROLE_ARN}"'",
             "Events": ["s3:ObjectCreated:*"]
         }]
     }'
